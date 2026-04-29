@@ -1,0 +1,130 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "User account information and preferences",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email"]
+    },
+    "Goal": {
+      "title": "Goal",
+      "description": "A long-term objective to track progress against",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "progress": { "type": "number" },
+        "status": { "type": "string", "enum": ["active", "completed", "abandoned"] },
+        "frequency": { "type": "string", "enum": ["daily", "weekly", "monthly", "interval"] },
+        "intervalValue": { "type": "integer" },
+        "anchorDate": { "type": "string", "format": "date" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "userId", "title", "progress", "status", "frequency"]
+    },
+    "Habit": {
+      "title": "Habit",
+      "description": "A recurring action that contributes to goals",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "goalId": { "type": "string" },
+        "name": { "type": "string" },
+        "frequency": { "type": "string", "enum": ["daily", "weekly", "monthly", "interval"] },
+        "targetCount": { "type": "integer" },
+        "streak": { "type": "integer" },
+        "maxStreak": { "type": "integer" },
+        "weight": { "type": "number", "description": "Impact on goal progress" },
+        "scheduledDays": { "type": "array", "items": { "type": "integer" } },
+        "scheduledTimes": { "type": "array", "items": { "type": "string" } },
+        "scheduledMonthDays": { "type": "array", "items": { "type": "integer" } },
+        "intervalValue": { "type": "integer" },
+        "anchorDate": { "type": "string", "format": "date" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "userId", "goalId", "name", "frequency", "weight"]
+    },
+    "HabitLog": {
+      "title": "Habit Log",
+      "description": "Record of a habit completion",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "habitId": { "type": "string" },
+        "userId": { "type": "string" },
+        "date": { "type": "string", "format": "date" },
+        "completed": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "habitId", "userId", "date", "completed"]
+    },
+    "TimelinePost": {
+      "title": "Timeline Post",
+      "description": "Social feed item for progress milestones",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "userPhoto": { "type": "string" },
+        "content": { "type": "string" },
+        "type": { "type": "string", "enum": ["milestone", "status", "goal_achieved"] },
+        "likes": { "type": "integer" },
+        "dislikes": { "type": "integer" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "userId", "content", "type", "createdAt"]
+    },
+    "Reaction": {
+      "title": "Reaction",
+      "description": "User reaction (like/dislike) to a timeline post",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "postId": { "type": "string" },
+        "type": { "type": "string", "enum": ["like", "dislike"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "postId", "type"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile data"
+    },
+    "/goals/{goalId}": {
+      "schema": "Goal",
+      "description": "User goals"
+    },
+    "/habits/{habitId}": {
+      "schema": "Habit",
+      "description": "User habits"
+    },
+    "/habitLogs/{logId}": {
+      "schema": "HabitLog",
+      "description": "Logs of habit completion"
+    },
+    "/timeline/{postId}": {
+      "schema": "TimelinePost",
+      "description": "Social feed items"
+    },
+    "/timeline/{postId}/reactions/{userId}": {
+      "schema": "Reaction",
+      "description": "User reactions to posts"
+    }
+  }
+}

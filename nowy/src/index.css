@@ -1,0 +1,108 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-blue: #3B82F6;
+  --color-brand-green: #10B981;
+  --color-surface: var(--surface);
+  --color-card-bg: var(--card-bg);
+  --color-card-border: var(--card-border);
+  --color-text-muted: var(--text-muted);
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+  @keyframes pulse-subtle {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.85; transform: scale(1.05); }
+  }
+
+  --animate-pulse-subtle: pulse-subtle 2s ease-in-out infinite;
+}
+
+@layer base {
+  :root {
+    --surface: #0F172A;
+    --card-bg: #1E293B;
+    --card-border: #334155;
+    --text-muted: #94A3B8;
+    --text-main: #F1F5F9;
+  }
+
+  body.light {
+    --surface: #F8FAFC;
+    --card-bg: #FFFFFF;
+    --card-border: #E2E8F0;
+    --text-muted: #64748B;
+    --text-main: #0F172A;
+  }
+
+  body {
+    @apply bg-surface text-[var(--text-main)] font-sans transition-colors duration-300 antialiased;
+    overscroll-behavior-y: contain;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+.bento-card {
+  @apply bg-card-bg rounded-[24px] p-5 sm:p-6 border border-card-border shadow-sm transition-all;
+}
+
+.bento-card-blue {
+  @apply bg-card-bg rounded-[24px] p-5 sm:p-6 border border-card-border shadow-sm transition-all border-t-4 border-t-brand-blue;
+}
+
+.bento-card-green {
+  @apply bg-card-bg rounded-[24px] p-5 sm:p-6 border border-card-border shadow-sm transition-all border-t-4 border-t-brand-green;
+}
+
+.title-small {
+  @apply uppercase tracking-widest text-[11px] font-semibold text-text-muted mb-2;
+}
+
+.stat-value {
+  @apply text-4xl font-bold text-[var(--text-main)];
+}
+
+.m3-button-primary {
+  @apply bg-brand-blue text-white px-6 py-3 rounded-full font-medium transition-all hover:opacity-90 active:scale-95;
+}
+
+.m3-button-secondary {
+  @apply bg-brand-green text-white px-6 py-3 rounded-full font-medium transition-all hover:opacity-90 active:scale-95;
+}
+
+.m3-input {
+  @apply bg-surface border border-card-border rounded-2xl px-4 py-3 focus:ring-2 focus:ring-brand-blue outline-none text-[var(--text-main)];
+}
+
+/* Hide Spinners in number inputs */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.inner-container {
+  @apply p-4 bg-surface rounded-2xl;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+
