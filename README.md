@@ -1,38 +1,42 @@
 # Nowy-final
 
-Este repositorio contiene la versión del proyecto **Nowy** organizada en Pull Requests separadas:
+Repositorio del proyecto **Nowy** con dos entregables:
 
-- **PR 1:** subida de la carpeta del proyecto (`nowy/`), excluyendo artefactos generados.
-- **PR 2:** subida del APK de debug.
+1. **Código fuente** en la carpeta `nowy/`
+2. **APK Android (debug)** en `apk/app-debug.apk`
 
-## Estructura principal
+## Qué contiene cada parte
 
-- `nowy/`: código fuente del proyecto.
-- `nowy/src/`: frontend y lógica principal.
-- `nowy/android/`: proyecto Android (Capacitor).
+- `nowy/`: app web/móvil (React + Capacitor), con todo el código para revisar o ejecutar el proyecto.
+- `apk/app-debug.apk`: versión instalable en Android para probar la app directamente sin compilar.
 
-## Requisitos
+## Cómo descargar el proyecto (carpeta `nowy`)
 
-- Node.js 20+
-- npm
-- Android Studio (para compilar APK en Android)
+1. Pulsa **Code** (botón verde) en GitHub.
+2. Pulsa **Download ZIP**.
+3. Descomprime el ZIP y entra en `nowy/`.
 
-## Ejecutar en local
+## Cómo descargar el APK
 
-1. Entra en la carpeta del proyecto:
-   `cd nowy`
-2. Instala dependencias:
-   `npm install`
-3. Arranca en desarrollo:
-   `npm run dev`
+1. Entra en la carpeta `apk/`.
+2. Abre `app-debug.apk`.
+3. Pulsa **Download raw file** para descargarlo.
+
+## Cómo ejecutar el proyecto en local
+
+1. Abre terminal dentro de `nowy/`.
+2. Instala dependencias: `npm install`
+3. Inicia en desarrollo: `npm run dev`
 
 ## Scripts útiles
 
-- `npm run dev` — entorno local
-- `npm run build` — build web
-- `npm test` — tests
-- `npm run lint` — chequeo de tipos
+- `npm run dev`: desarrollo local
+- `npm run build`: build web
+- `npm test`: tests
+- `npm run lint`: chequeo de tipos
 
-## Nota
+## Instalación del APK en Android
 
-El APK se gestiona en una PR independiente para mantener el historial limpio y facilitar revisiones.
+1. Copia `app-debug.apk` al móvil.
+2. Activa instalación de apps de origen desconocido para el gestor de archivos/navegador usado.
+3. Abre el APK y confirma la instalación.
